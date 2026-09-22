@@ -941,6 +941,905 @@ card.type = "button";
 
 
 /* =========================================
+   LEARNING ENGINE
+========================================= */
+
+const learningScreen =
+  document.getElementById("learningScreen");
+
+const chapterListSection =
+  document.getElementById("chapterListSection");
+
+const chapterList =
+  document.getElementById("chapterList");
+
+const lessonSection =
+  document.getElementById("lessonSection");
+
+const learningSubjectTitle =
+  document.getElementById("learningSubjectTitle");
+
+const learningProfileSummary =
+  document.getElementById("learningProfileSummary");
+
+const learningProfileLabel =
+  document.getElementById("learningProfileLabel");
+
+const lessonSubjectLabel =
+  document.getElementById("lessonSubjectLabel");
+
+const lessonTitle =
+  document.getElementById("lessonTitle");
+
+const lessonTopic =
+  document.getElementById("lessonTopic");
+
+const lessonProgressText =
+  document.getElementById("lessonProgressText");
+
+const lessonProgressBar =
+  document.getElementById("lessonProgressBar");
+
+const lessonConceptTitle =
+  document.getElementById("lessonConceptTitle");
+
+const lessonExplanation =
+  document.getElementById("lessonExplanation");
+
+const lessonExample =
+  document.getElementById("lessonExample");
+
+const practiceQuestion =
+  document.getElementById("practiceQuestion");
+
+const practiceOptions =
+  document.getElementById("practiceOptions");
+
+const practiceFeedback =
+  document.getElementById("practiceFeedback");
+
+const completeLessonButton =
+  document.getElementById("completeLessonButton");
+
+const backToDashboardButton =
+  document.getElementById("backToDashboardButton");
+
+const backToChaptersButton =
+  document.getElementById("backToChaptersButton");
+
+
+/*
+  This is the starter curriculum layer.
+
+  IMPORTANT:
+  These are ORIGINAL starter lessons.
+  They are not copied from Scribd or any textbook.
+*/
+
+const starterCurriculum = {
+
+  Mathematics: {
+
+    junior: [
+      {
+        chapter: "Numbers Around Us",
+        lessons: [
+          {
+            title: "Understanding Numbers",
+            topic: "Place value and number sense",
+            explanation:
+              "Numbers tell us how many or how much. Place value tells us what each digit means because its value depends on its position.",
+            example:
+              "In 245, the 2 means 200, the 4 means 40, and the 5 means 5.",
+            question:
+              "What is the value of the digit 4 in 245?",
+            options: [
+              "4",
+              "40",
+              "400",
+              "4000"
+            ],
+            answer: 1,
+            explanationAfter:
+              "The 4 is in the tens place, so its value is 40."
+          }
+        ]
+      }
+    ],
+
+    middle: [
+      {
+        chapter: "Integers",
+        lessons: [
+          {
+            title: "Adding Integers",
+            topic: "Positive and negative numbers",
+            explanation:
+              "Integers include positive numbers, negative numbers and zero. When adding integers with the same sign, add their absolute values and keep the sign.",
+            example:
+              "(-4) + (-3) = -7 because both numbers are negative.",
+            question:
+              "What is (-8) + 5?",
+            options: [
+              "-13",
+              "-3",
+              "3",
+              "13"
+            ],
+            answer: 1,
+            explanationAfter:
+              "Start at -8 and move 5 places toward zero. You reach -3."
+          }
+        ]
+      },
+
+      {
+        chapter: "Algebra",
+        lessons: [
+          {
+            title: "Simple Algebraic Expressions",
+            topic: "Variables and expressions",
+            explanation:
+              "A variable represents an unknown value. An algebraic expression combines numbers, variables and operations.",
+            example:
+              "If x = 4, then 3x + 2 = 3(4) + 2 = 14.",
+            question:
+              "If x = 5, what is 2x + 3?",
+            options: [
+              "8",
+              "10",
+              "13",
+              "15"
+            ],
+            answer: 2,
+            explanationAfter:
+              "Substitute 5 for x: 2 × 5 + 3 = 13."
+          }
+        ]
+      }
+    ],
+
+    secondary: [
+      {
+        chapter: "Real Numbers",
+        lessons: [
+          {
+            title: "Rational and Irrational Numbers",
+            topic: "Number classification",
+            explanation:
+              "A rational number can be written as p/q where p and q are integers and q is not zero. Irrational numbers cannot be written in that form.",
+            example:
+              "1/2 and 3 are rational. √2 is irrational.",
+            question:
+              "Which of the following is irrational?",
+            options: [
+              "0.5",
+              "3/4",
+              "√2",
+              "2"
+            ],
+            answer: 2,
+            explanationAfter:
+              "√2 cannot be expressed as a ratio of two integers, so it is irrational."
+          }
+        ]
+      }
+    ]
+
+  },
+
+  Science: {
+
+    middle: [
+      {
+        chapter: "Life Processes",
+        lessons: [
+          {
+            title: "Photosynthesis",
+            topic: "How plants make food",
+            explanation:
+              "Photosynthesis is the process by which green plants use light energy to make food from carbon dioxide and water.",
+            example:
+              "Leaves contain chlorophyll, which absorbs light energy needed for photosynthesis.",
+            question:
+              "Which pigment absorbs most of the light energy used in photosynthesis?",
+            options: [
+              "Haemoglobin",
+              "Chlorophyll",
+              "Melanin",
+              "Keratin"
+            ],
+            answer: 1,
+            explanationAfter:
+              "Chlorophyll is the green pigment that absorbs light energy for photosynthesis."
+          }
+        ]
+      }
+    ],
+
+    secondary: [
+      {
+        chapter: "Motion",
+        lessons: [
+          {
+            title: "Speed and Velocity",
+            topic: "Describing motion",
+            explanation:
+              "Speed tells us how quickly an object covers distance. Velocity also includes the direction of motion.",
+            example:
+              "A car travelling 60 km in 2 hours has an average speed of 30 km/h.",
+            question:
+              "What is the average speed of an object that travels 100 m in 20 s?",
+            options: [
+              "2 m/s",
+              "5 m/s",
+              "20 m/s",
+              "2000 m/s"
+            ],
+            answer: 1,
+            explanationAfter:
+              "Average speed = distance ÷ time = 100 ÷ 20 = 5 m/s."
+          }
+        ]
+      }
+    ]
+
+  },
+
+  English: {
+
+    junior: [
+      {
+        chapter: "Reading Skills",
+        lessons: [
+          {
+            title: "Finding the Main Idea",
+            topic: "Reading comprehension",
+            explanation:
+              "The main idea is the most important point the writer wants the reader to understand.",
+            example:
+              "If a paragraph explains why trees are important for clean air, its main idea may be the importance of trees.",
+            question:
+              "What does the main idea tell us?",
+            options: [
+              "The least important detail",
+              "The central point",
+              "Only the first word",
+              "The punctuation"
+            ],
+            answer: 1,
+            explanationAfter:
+              "The main idea is the central point of a passage."
+          }
+        ]
+      }
+    ]
+
+  }
+
+};
+
+
+/*
+  Returns the correct curriculum level for the
+  student's grade.
+*/
+
+function getCurriculumLevel() {
+
+  if (Number(app.grade) <= 5) {
+    return "junior";
+  }
+
+  if (Number(app.grade) <= 8) {
+    return "middle";
+  }
+
+  return "secondary";
+
+}
+
+
+/*
+  Returns lessons for the selected student profile.
+*/
+
+function getSubjectCurriculum(subjectName) {
+
+  const subjectData =
+    starterCurriculum[subjectName];
+
+  if (!subjectData) {
+    return [];
+  }
+
+  const level =
+    getCurriculumLevel();
+
+  return subjectData[level] || [];
+
+}
+
+
+/*
+  Open a subject WITHOUT giving XP.
+*/
+
+function openSubject(subjectName) {
+
+  app.currentSubject =
+    subjectName;
+
+  saveData();
+
+  learningSubjectTitle.textContent =
+    subjectName;
+
+  learningProfileSummary.textContent =
+    `Grade ${app.grade} • ${app.board}${
+      app.stream ? ` • ${app.stream}` : ""
+    }`;
+
+  learningProfileLabel.textContent =
+    `${subjectName} • Grade ${app.grade}`;
+
+  chapterListSection.hidden = false;
+
+  lessonSection.hidden = true;
+
+  renderChapterList(subjectName);
+
+  showScreen(learningScreen);
+
+}
+
+
+/*
+  Render chapters.
+*/
+
+function renderChapterList(subjectName) {
+
+  chapterList.innerHTML = "";
+
+  const chapters =
+    getSubjectCurriculum(subjectName);
+
+  if (!chapters.length) {
+
+    chapterList.innerHTML = `
+      <div class="lesson-card">
+        <h3>Learning content is being prepared</h3>
+        <p>
+          BrainBox does not award XP for opening a subject.
+          New lessons will appear here when curriculum
+          content is available for this grade and subject.
+        </p>
+      </div>
+    `;
+
+    return;
+
+  }
+
+  chapters.forEach((chapter, chapterIndex) => {
+
+    const completedCount =
+      chapter.lessons.filter(
+        lesson =>
+          isLessonCompleted(
+            subjectName,
+            chapterIndex,
+            lesson.title
+          )
+      ).length;
+
+    const card =
+      document.createElement("button");
+
+    card.type = "button";
+
+    card.className =
+      "chapter-card";
+
+    card.innerHTML = `
+      <div>
+        <div class="lesson-badge">
+          CHAPTER ${chapterIndex + 1}
+        </div>
+
+        <h3>${chapter.chapter}</h3>
+
+        <p>
+          ${completedCount}/${chapter.lessons.length}
+          lessons completed
+        </p>
+      </div>
+
+      <span>→</span>
+    `;
+
+    card.addEventListener("click", () => {
+
+      openChapter(
+        subjectName,
+        chapterIndex
+      );
+
+    });
+
+    chapterList.appendChild(card);
+
+  });
+
+}
+
+
+/*
+  Open a chapter.
+*/
+
+function openChapter(
+  subjectName,
+  chapterIndex
+) {
+
+  const chapters =
+    getSubjectCurriculum(subjectName);
+
+  const chapter =
+    chapters[chapterIndex];
+
+  if (!chapter) return;
+
+  chapterListSection.hidden = true;
+
+  lessonSection.hidden = false;
+
+  const savedLesson =
+    getSavedLessonIndex(
+      subjectName,
+      chapterIndex
+    );
+
+  openLesson(
+    subjectName,
+    chapterIndex,
+    savedLesson
+  );
+
+}
+
+
+/*
+  Open a lesson.
+*/
+
+function openLesson(
+  subjectName,
+  chapterIndex,
+  lessonIndex
+) {
+
+  const chapters =
+    getSubjectCurriculum(subjectName);
+
+  const chapter =
+    chapters[chapterIndex];
+
+  if (!chapter) return;
+
+  const lesson =
+    chapter.lessons[lessonIndex];
+
+  if (!lesson) return;
+
+  app.currentSubject =
+    subjectName;
+
+  app.currentChapter =
+    chapterIndex;
+
+  app.currentLesson =
+    lessonIndex;
+
+  app.lessonPracticePassed =
+    false;
+
+  lessonSubjectLabel.textContent =
+    subjectName.toUpperCase();
+
+  lessonTitle.textContent =
+    lesson.title;
+
+  lessonTopic.textContent =
+    lesson.topic;
+
+  lessonProgressText.textContent =
+    `Lesson ${lessonIndex + 1} of ${chapter.lessons.length}`;
+
+  lessonProgressBar.style.width =
+    `${((lessonIndex + 1) / chapter.lessons.length) * 100}%`;
+
+  lessonConceptTitle.textContent =
+    lesson.topic;
+
+  lessonExplanation.innerHTML =
+    `<p>${lesson.explanation}</p>`;
+
+  lessonExample.innerHTML =
+    `<p>${lesson.example}</p>`;
+
+  practiceQuestion.textContent =
+    lesson.question;
+
+  practiceFeedback.textContent =
+    "";
+
+  completeLessonButton.disabled =
+    true;
+
+  renderPracticeOptions(
+    lesson
+  );
+
+  saveData();
+
+}
+
+
+/*
+  Practice question.
+
+  Answering incorrectly gives no reward.
+*/
+
+function renderPracticeOptions(lesson) {
+
+  practiceOptions.innerHTML = "";
+
+  lesson.options.forEach(
+    (option, optionIndex) => {
+
+      const button =
+        document.createElement("button");
+
+      button.type = "button";
+
+      button.className =
+        "practice-option";
+
+      button.textContent =
+        option;
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const allOptions =
+            practiceOptions.querySelectorAll(
+              ".practice-option"
+            );
+
+          allOptions.forEach(
+            item => {
+              item.disabled = true;
+            }
+          );
+
+          if (
+            optionIndex ===
+            lesson.answer
+          ) {
+
+            app.lessonPracticePassed =
+              true;
+
+            practiceFeedback.innerHTML = `
+              <strong>Correct! ✓</strong>
+              <p>
+                ${lesson.explanationAfter}
+              </p>
+            `;
+
+            completeLessonButton.disabled =
+              false;
+
+            showToast(
+              "Correct answer. Finish the lesson to earn XP.",
+              "🧠"
+            );
+
+          } else {
+
+            practiceFeedback.innerHTML = `
+              <strong>Not quite.</strong>
+              <p>
+                Review the explanation above,
+                then try the question again.
+              </p>
+            `;
+
+            allOptions.forEach(
+              item => {
+                item.disabled = false;
+              }
+            );
+
+          }
+
+        }
+      );
+
+      practiceOptions.appendChild(button);
+
+    }
+  );
+
+}
+
+
+/*
+  Complete a lesson.
+
+  THIS is where XP is earned.
+*/
+
+completeLessonButton.addEventListener(
+  "click",
+  () => {
+
+    if (!app.lessonPracticePassed) {
+      return;
+    }
+
+    const subjectName =
+      app.currentSubject;
+
+    const chapterIndex =
+      app.currentChapter;
+
+    const lessonIndex =
+      app.currentLesson;
+
+    markLessonCompleted(
+      subjectName,
+      chapterIndex,
+      lessonIndex
+    );
+
+    app.studyMinutes += 5;
+
+    addXP(
+      25,
+      "Lesson completed"
+    );
+
+    updateLearningProgress();
+
+    checkAchievements();
+
+    saveData();
+
+    showToast(
+      "Lesson completed! +25 XP",
+      "🎓"
+    );
+
+    const chapters =
+      getSubjectCurriculum(
+        subjectName
+      );
+
+    const chapter =
+      chapters[chapterIndex];
+
+    const nextLessonIndex =
+      lessonIndex + 1;
+
+    if (
+      chapter &&
+      nextLessonIndex <
+      chapter.lessons.length
+    ) {
+
+      openLesson(
+        subjectName,
+        chapterIndex,
+        nextLessonIndex
+      );
+
+    } else {
+
+      renderChapterList(
+        subjectName
+      );
+
+      chapterListSection.hidden =
+        false;
+
+      lessonSection.hidden =
+        true;
+
+    }
+
+  }
+);
+
+
+/*
+  Save completed lessons.
+*/
+
+function markLessonCompleted(
+  subjectName,
+  chapterIndex,
+  lessonIndex
+) {
+
+  if (!Array.isArray(app.completedLessons)) {
+    app.completedLessons = [];
+  }
+
+  const key =
+    `${subjectName}|${chapterIndex}|${lessonIndex}`;
+
+  if (
+    !app.completedLessons.includes(key)
+  ) {
+
+    app.completedLessons.push(key);
+
+  }
+
+}
+
+
+/*
+  Check lesson completion.
+*/
+
+function isLessonCompleted(
+  subjectName,
+  chapterIndex,
+  lessonTitle
+) {
+
+  const chapters =
+    getSubjectCurriculum(
+      subjectName
+    );
+
+  const chapter =
+    chapters[chapterIndex];
+
+  if (!chapter) return false;
+
+  const lessonIndex =
+    chapter.lessons.findIndex(
+      lesson =>
+        lesson.title === lessonTitle
+    );
+
+  if (lessonIndex === -1) {
+    return false;
+  }
+
+  const key =
+    `${subjectName}|${chapterIndex}|${lessonIndex}`;
+
+  return Array.isArray(
+    app.completedLessons
+  ) &&
+  app.completedLessons.includes(key);
+
+}
+
+
+/*
+  Resume the last lesson.
+*/
+
+function resumeLearning() {
+
+  if (
+    app.currentSubject &&
+    Number.isInteger(
+      app.currentChapter
+    ) &&
+    Number.isInteger(
+      app.currentLesson
+    )
+  ) {
+
+    openSubject(
+      app.currentSubject
+    );
+
+    setTimeout(() => {
+
+      openChapter(
+        app.currentSubject,
+        app.currentChapter
+      );
+
+    }, 0);
+
+    return;
+
+  }
+
+  const firstSubject =
+    getRecommendedSubject();
+
+  if (firstSubject) {
+
+    openSubject(firstSubject);
+
+  } else {
+
+    showToast(
+      "Choose a subject to start learning.",
+      "📚"
+    );
+
+  }
+
+}
+
+
+function getRecommendedSubject() {
+
+  const firstCard =
+    subjectsGrid.querySelector(
+      ".subject-card"
+    );
+
+  if (!firstCard) return "";
+
+  const name =
+    firstCard.querySelector(
+      "strong"
+    );
+
+  return name
+    ? name.textContent
+    : "";
+
+}
+
+
+backToDashboardButton.addEventListener(
+  "click",
+  () => {
+
+    showScreen(
+      dashboardScreen
+    );
+
+  }
+);
+
+
+backToChaptersButton.addEventListener(
+  "click",
+  () => {
+
+    chapterListSection.hidden =
+      false;
+
+    lessonSection.hidden =
+      true;
+
+    renderChapterList(
+      app.currentSubject
+    );
+
+  }
+);
+
+
+/* =========================================
    ENERGY SYSTEM
 ========================================= */
 
