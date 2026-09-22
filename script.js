@@ -2624,12 +2624,7 @@ document
     "click",
     () => {
 
-      addEnergy(5);
-
-      showToast(
-        "Learning mode is ready! +5 ⚡",
-        "📚"
-      );
+      resumeLearning();
 
     }
   );
