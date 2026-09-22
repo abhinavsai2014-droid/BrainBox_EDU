@@ -171,6 +171,192 @@ const toastIcon =
 const achievementCount =
   document.getElementById("achievementCount");
 
+const achievementGrid =
+  document.getElementById("achievementGrid");
+
+const achievements = [
+
+  {
+    id: "brain-starter",
+    icon: "🌱",
+    name: "Brain Starter",
+    description: "Complete your first lesson.",
+    check: () =>
+      getCompletedLessonCount() >= 1
+  },
+
+  {
+    id: "sharp-thinker",
+    icon: "🧠",
+    name: "Sharp Thinker",
+    description: "Answer 5 learning questions correctly.",
+    check: () =>
+      Number(app.totalCorrectAnswers || 0) >= 5
+  },
+
+  {
+    id: "daily-goal",
+    icon: "🎯",
+    name: "Goal Getter",
+    description: "Complete a 30-minute daily goal.",
+    check: () =>
+      Boolean(app.dailyGoalCompleted)
+  },
+
+  {
+    id: "seven-day",
+    icon: "🔥",
+    name: "7-Day Hero",
+    description: "Build a 7-day learning streak.",
+    check: () =>
+      Number(app.bestStreak || 0) >= 7
+  },
+
+  {
+    id: "math-builder",
+    icon: "🧮",
+    name: "Math Builder",
+    description: "Complete 5 Mathematics lessons.",
+    check: () =>
+      getCompletedSubjectCount(
+        "Mathematics"
+      ) >= 5
+  }
+
+];
+
+
+function getCompletedLessonCount() {
+
+  return Array.isArray(
+    app.completedLessons
+  )
+    ? app.completedLessons.length
+    : 0;
+
+}
+
+
+function getCompletedSubjectCount(
+  subjectName
+) {
+
+  if (
+    !Array.isArray(
+      app.completedLessons
+    )
+  ) {
+    return 0;
+  }
+
+  return app.completedLessons
+    .filter(
+      item =>
+        item.startsWith(
+          `${subjectName}|`
+        )
+    )
+    .length;
+
+}
+
+
+function checkAchievements() {
+
+  if (
+    !Array.isArray(
+      app.unlockedAchievements
+    )
+  ) {
+
+    app.unlockedAchievements = [];
+
+  }
+
+  achievements.forEach(
+    achievement => {
+
+      if (
+        app.unlockedAchievements.includes(
+          achievement.id
+        )
+      ) {
+        return;
+      }
+
+      if (
+        achievement.check()
+      ) {
+
+        app.unlockedAchievements.push(
+          achievement.id
+        );
+
+        showToast(
+          `Achievement unlocked: ${achievement.name}`,
+          "🏆"
+        );
+
+      }
+
+    }
+  );
+
+  renderAchievements();
+
+  achievementCount.textContent =
+    app.unlockedAchievements.length;
+
+  saveData();
+
+}
+
+
+function renderAchievements() {
+
+  achievementGrid.innerHTML = "";
+
+  achievements.forEach(
+    achievement => {
+
+      const unlocked =
+        app.unlockedAchievements.includes(
+          achievement.id
+        );
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        unlocked
+          ? "achievement-card unlocked"
+          : "achievement-card";
+
+      card.innerHTML = `
+        <div
+          class="achievement-icon ${
+            unlocked ? "" : "locked"
+          }"
+        >
+          ${achievement.icon}
+        </div>
+
+        <strong>
+          ${achievement.name}
+        </strong>
+
+        <span>
+          ${achievement.description}
+        </span>
+      `;
+
+      achievementGrid.appendChild(card);
+
+    }
+  );
+
+}
+
 
 /* =========================================
    SUBJECT DATA
