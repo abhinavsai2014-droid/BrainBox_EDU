@@ -1843,18 +1843,48 @@ backToChaptersButton.addEventListener(
    ENERGY SYSTEM
 ========================================= */
 
-function addEnergy(amount) {
+function addXP(amount, reason = "Learning activity completed") {
 
-  app.energy += amount;
-
-  if (app.energy > app.maxEnergy) {
-    app.energy =
-      app.maxEnergy;
+  if (!Number.isFinite(amount) || amount <= 0) {
+    return;
   }
+
+  app.energy =
+    Math.max(
+      0,
+      Number(app.energy || 0) + amount
+    );
+
+  updateLevel();
 
   updateEnergy();
 
   saveData();
+
+}
+
+
+function updateLevel() {
+
+  const xp =
+    Number(app.energy || 0);
+
+  /*
+    Every 100 XP = one level.
+  */
+
+  app.level =
+    Math.floor(xp / 100) + 1;
+
+}
+
+
+function getXPForNextLevel() {
+
+  return (
+    (app.level * 100) -
+    Number(app.energy || 0)
+  );
 
 }
 
