@@ -2420,28 +2420,188 @@ function stopTimer() {
 }
 
 
+/* =========================================
+   DAILY LEARNING TRACKING
+========================================= */
+
+function getTodayKey() {
+
+  const now =
+    new Date();
+
+  return now.toISOString()
+    .slice(0, 10);
+
+}
+
+
+function getYesterdayKey() {
+
+  const date =
+    new Date();
+
+  date.setDate(
+    date.getDate() - 1
+  );
+
+  return date.toISOString()
+    .slice(0, 10);
+
+}
+
+
+function prepareDailyState() {
+
+  const today =
+    getTodayKey();
+
+  if (
+    app.lastDailyReset !== today
+  ) {
+
+    app.todayStudyMinutes = 0;
+
+    app.todayCorrectAnswers = 0;
+
+    app.dailyGoalCompleted = false;
+
+    app.lastDailyReset =
+      today;
+
+    saveData();
+
+  }
+
+}
+
+
+function recordStudyActivity(
+  minutes,
+  dateKey = getTodayKey()
+) {
+
+  prepareDailyState();
+
+  app.studyMinutes =
+    Number(app.studyMinutes || 0) +
+    minutes;
+
+  if (
+    dateKey === getTodayKey()
+  ) {
+
+    app.todayStudyMinutes =
+      Number(
+        app.todayStudyMinutes || 0
+      ) + minutes;
+
+  }
+
+  updateStreak(dateKey);
+
+  updateLearningProgress();
+
+}
+
+
+function updateStreak(dateKey) {
+
+  if (
+    app.lastStudyDate === dateKey
+  ) {
+    return;
+  }
+
+  if (
+    app.lastStudyDate ===
+    getYesterdayKey()
+  ) {
+
+    app.streak =
+      Number(app.streak || 0) + 1;
+
+  } else {
+
+    app.streak = 1;
+
+  }
+
+  app.bestStreak =
+    Math.max(
+      Number(app.bestStreak || 0),
+      app.streak
+    );
+
+  app.lastStudyDate =
+    dateKey;
+
+}
+
+
+function checkDailyGoal() {
+
+  prepareDailyState();
+
+  if (
+    Number(app.todayStudyMinutes || 0) >=
+    Number(app.dailyGoal || 30)
+  ) {
+
+    if (!app.dailyGoalCompleted) {
+
+      app.dailyGoalCompleted =
+        true;
+
+      addXP(
+        20,
+        "Daily learning goal completed"
+      );
+
+      showToast(
+        "Daily goal reached! +20 XP",
+        "🎯"
+      );
+
+    }
+
+  }
+
+}
+
 function completeFocusSession() {
 
   stopTimer();
 
-  app.studyMinutes += 15;
+  const today =
+    getTodayKey();
 
-  addXP(10);
+  recordStudyActivity(
+    15,
+    today
+  );
 
-  goalValue.textContent =
-    app.studyMinutes;
+  addXP(
+    10,
+    "15-minute focus session"
+  );
+
+  checkDailyGoal();
+
+  checkAchievements();
 
   app.timerSeconds =
     15 * 60;
 
   updateTimer();
 
-  showToast(
-    "Focus session complete! +10 ⚡",
-    "⏱️"
-  );
+  updateLearningProgress();
 
   saveData();
+
+  showToast(
+    "15-minute focus session complete! +10 XP",
+    "⏱️"
+  );
 
 }
 
