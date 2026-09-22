@@ -620,6 +620,210 @@
   </section>
 
 
+    <!-- =========================
+       LEARNING SCREEN
+  ========================== -->
+
+  <section
+    id="learningScreen"
+    class="screen learning-screen"
+    aria-hidden="true"
+  >
+
+    <header class="learning-topbar">
+
+      <button
+        type="button"
+        id="backToDashboardButton"
+        class="icon-button"
+        aria-label="Back to dashboard"
+      >
+        ←
+      </button>
+
+      <div>
+        <div class="brand-name">
+          BrainBox <span>EDU</span>
+        </div>
+
+        <div
+          id="learningProfileLabel"
+          class="learning-profile-label"
+        >
+          Learning
+        </div>
+      </div>
+
+    </header>
+
+
+    <main class="learning-container">
+
+      <section class="learning-hero">
+
+        <div class="section-kicker">
+          YOUR LEARNING PATH
+        </div>
+
+        <h1 id="learningSubjectTitle">
+          Mathematics
+        </h1>
+
+        <p id="learningProfileSummary">
+          Grade • Board
+        </p>
+
+      </section>
+
+
+      <!-- CHAPTER LIST -->
+
+      <section id="chapterListSection">
+
+        <div class="learning-section-heading">
+
+          <div>
+            <div class="section-kicker">
+              CHAPTERS
+            </div>
+
+            <h2>Choose what to learn</h2>
+          </div>
+
+        </div>
+
+        <div id="chapterList"></div>
+
+      </section>
+
+
+      <!-- LESSON -->
+
+      <section
+        id="lessonSection"
+        class="lesson-section"
+        hidden
+      >
+
+        <button
+          type="button"
+          id="backToChaptersButton"
+          class="text-button"
+        >
+          ← Back to chapters
+        </button>
+
+        <div class="lesson-header">
+
+          <div>
+            <div
+              id="lessonSubjectLabel"
+              class="section-kicker"
+            >
+              MATHEMATICS
+            </div>
+
+            <h2 id="lessonTitle">
+              Lesson
+            </h2>
+
+            <p id="lessonTopic">
+              Topic
+            </p>
+          </div>
+
+          <div
+            id="lessonProgressText"
+            class="lesson-progress-text"
+          >
+            Lesson 1
+          </div>
+
+        </div>
+
+
+        <div class="lesson-progress-track">
+
+          <div
+            id="lessonProgressBar"
+            class="lesson-progress-fill"
+          ></div>
+
+        </div>
+
+
+        <article class="lesson-card">
+
+          <div class="lesson-badge">
+            CONCEPT
+          </div>
+
+          <h3 id="lessonConceptTitle">
+            Learn the concept
+          </h3>
+
+          <div id="lessonExplanation">
+          </div>
+
+        </article>
+
+
+        <article class="lesson-card example-card">
+
+          <div class="lesson-badge">
+            EXAMPLE
+          </div>
+
+          <h3>Worked example</h3>
+
+          <div id="lessonExample">
+          </div>
+
+        </article>
+
+
+        <article class="lesson-card practice-card">
+
+          <div class="lesson-badge">
+            PRACTICE
+          </div>
+
+          <h3 id="practiceQuestion">
+            Practice question
+          </h3>
+
+          <div
+            id="practiceOptions"
+            class="practice-options"
+          >
+          </div>
+
+          <div
+            id="practiceFeedback"
+            class="practice-feedback"
+            aria-live="polite"
+          >
+          </div>
+
+        </article>
+
+
+        <button
+          type="button"
+          id="completeLessonButton"
+          class="primary-button"
+          disabled
+        >
+          Complete Lesson
+        </button>
+
+      </section>
+
+    </main>
+
+  </section>
+  
+  
   <!-- =========================
        OLYMPIAD MODAL
   ========================== -->
