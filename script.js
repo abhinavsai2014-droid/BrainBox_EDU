@@ -2054,6 +2054,101 @@ backToChaptersButton.addEventListener(
   }
 );
 
+function updateLearningProgress() {
+
+  const completed =
+    getCompletedLessonCount();
+
+  const total =
+    getTotalAvailableLessons();
+
+  if (
+    goalValue
+  ) {
+
+    goalValue.textContent =
+      Number(
+        app.todayStudyMinutes || 0
+      );
+
+  }
+
+  if (
+    streakValue
+  ) {
+
+    streakValue.textContent =
+      Number(
+        app.streak || 0
+      );
+
+  }
+
+  if (
+    achievementCount
+  ) {
+
+    achievementCount.textContent =
+      Array.isArray(
+        app.unlockedAchievements
+      )
+        ? app.unlockedAchievements.length
+        : 0;
+
+  }
+
+  const nextXP =
+    getXPForNextLevel();
+
+  const xpNextLabel =
+    document.getElementById(
+      "xpNextLabel"
+    );
+
+  if (xpNextLabel) {
+
+    xpNextLabel.textContent =
+      `${nextXP} XP to reach Level ${app.level + 1}`;
+
+  }
+
+}
+
+
+function getTotalAvailableLessons() {
+
+  let total = 0;
+
+  const visibleSubjects =
+    Array.from(
+      subjectsGrid.querySelectorAll(
+        ".subject-card"
+      )
+    );
+
+  visibleSubjects.forEach(card => {
+
+    const name =
+      card.querySelector(
+        "strong"
+      )?.textContent;
+
+    if (!name) return;
+
+    getSubjectCurriculum(name)
+      .forEach(chapter => {
+
+        total +=
+          chapter.lessons.length;
+
+      });
+
+  });
+
+  return total;
+
+}
+
 
 /* =========================================
    ENERGY SYSTEM
