@@ -2202,6 +2202,14 @@ function getXPForNextLevel() {
 
 function updateEnergy() {
 
+  app.energy =
+    Math.max(
+      0,
+      Number(app.energy || 0)
+    );
+
+  updateLevel();
+
   energyValue.textContent =
     app.energy;
 
@@ -2209,28 +2217,37 @@ function updateEnergy() {
     app.level;
 
   const percentage =
-    (app.energy / app.maxEnergy) * 100;
+    Math.min(
+      100,
+      (app.energy % 100) || (
+        app.energy > 0 ? 100 : 0
+      )
+    );
 
   energyBar.style.width =
     `${percentage}%`;
 
-   energyBar.setAttribute(
-  "aria-valuenow",
-  Math.round(app.energy)
-);
+  energyBar.setAttribute(
+    "aria-valuenow",
+    Math.round(
+      app.energy
+    )
+  );
+
   energyPercent.textContent =
-    `${Math.round(percentage)}%`;
+    `${Math.round(
+      percentage
+    )}%`;
 
-  if (app.energy >= 500) {
+  const xpNextLabel =
+    document.getElementById(
+      "xpNextLabel"
+    );
 
-    app.level =
-      Math.max(
-        app.level,
-        2
-      );
+  if (xpNextLabel) {
 
-    levelValue.textContent =
-      app.level;
+    xpNextLabel.textContent =
+      `${getXPForNextLevel()} XP to Level ${app.level + 1}`;
 
   }
 
