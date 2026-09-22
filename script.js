@@ -2630,7 +2630,48 @@ function answerQuestion(
 
 function finishQuiz() {
 
-  quizArea.innerHTML = `
+  const questions =
+  getQuizQuestions();
+
+const totalQuestions =
+  questions.length;
+
+if (
+  totalQuestions > 0 &&
+  app.quizScore > 0
+) {
+
+  const previousBest =
+    Number(
+      app.quizBestScores?.overall || 0
+    );
+
+  if (
+    app.quizScore >
+    previousBest
+  ) {
+
+    if (!app.quizBestScores) {
+      app.quizBestScores = {};
+    }
+
+    app.quizBestScores.overall =
+      app.quizScore;
+
+  }
+
+  addXP(
+    25,
+    "Completed Olympiad challenge"
+  );
+
+  checkAchievements();
+
+  saveData();
+
+}
+   
+   quizArea.innerHTML = `
     <div class="quiz-question">
 
       <h3>
