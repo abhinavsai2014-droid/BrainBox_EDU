@@ -1716,7 +1716,19 @@ function renderPracticeOptions(lesson) {
           if (
             optionIndex ===
             lesson.answer
-          ) {
+         )  {
+
+            app.totalCorrectAnswers =
+              Number(
+                app.totalCorrectAnswers || 0
+              ) + 1;
+
+            checkAchievements();
+
+            saveData();
+
+            app.lessonPracticePassed =
+              true;
 
             app.lessonPracticePassed =
               true;
