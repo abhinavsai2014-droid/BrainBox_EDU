@@ -2601,8 +2601,6 @@ function answerQuestion(
     quizScore.textContent =
       app.quizScore;
 
-    addXP(5);
-
     showToast(
       "Boom! That's brain power! +5 ⚡",
       "⚡"
