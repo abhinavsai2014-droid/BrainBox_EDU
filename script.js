@@ -397,79 +397,71 @@ const subjects = {
    OLYMPIAD QUESTIONS
 ========================================= */
 
-const olympiadQuestions = [
+function getQuizQuestions() {
 
-  {
-    question:
-      "A number is doubled and then 6 is added. The result is 20. What is the number?",
+  const questions = [];
 
-    options: [
-      "5",
-      "6",
-      "7",
-      "8"
-    ],
+  const subjectNames =
+    Array.from(
+      subjectsGrid.querySelectorAll(
+        ".subject-card strong"
+      )
+    )
+    .map(
+      item => item.textContent
+    );
 
-    answer: 2
-  },
+  subjectNames.forEach(
+    subjectName => {
 
-  {
-    question:
-      "Which number should come next? 2, 4, 8, 16, ___",
+      const chapters =
+        getSubjectCurriculum(
+          subjectName
+        );
 
-    options: [
-      "20",
-      "24",
-      "32",
-      "36"
-    ],
+      chapters.forEach(
+        chapter => {
 
-    answer: 2
-  },
+          chapter.lessons.forEach(
+            lesson => {
 
-  {
-    question:
-      "If all squares are rectangles, which statement must be true?",
+              questions.push({
 
-    options: [
-      "Every rectangle is a square",
-      "Every square is a rectangle",
-      "No square is a rectangle",
-      "Squares have no sides"
-    ],
+                subject:
+                  subjectName,
 
-    answer: 1
-  },
+                topic:
+                  lesson.topic,
 
-  {
-    question:
-      "A clock shows 3:00. What is the angle between the hour and minute hands?",
+                question:
+                  lesson.question,
 
-    options: [
-      "45°",
-      "60°",
-      "90°",
-      "180°"
-    ],
+                options:
+                  lesson.options,
 
-    answer: 2
-  },
+                answer:
+                  lesson.answer,
 
-  {
-    question:
-      "Which word does NOT belong with the others?",
+                explanation:
+                  lesson.explanationAfter
 
-    options: [
-      "Triangle",
-      "Square",
-      "Circle",
-      "Rectangle"
-    ],
+              });
 
-    answer: 2
-  }
+            }
+          );
 
-];
+        }
+      );
+
+    }
+  );
+
+  return questions.slice(
+    0,
+    5
+  );
+
+}
 
 
 /* =========================================
