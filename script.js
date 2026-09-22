@@ -2281,7 +2281,7 @@ function answerQuestion(
     quizScore.textContent =
       app.quizScore;
 
-    addEnergy(5);
+    addXP(5);
 
     showToast(
       "Boom! That's brain power! +5 ⚡",
@@ -2426,7 +2426,7 @@ function completeFocusSession() {
 
   app.studyMinutes += 15;
 
-  addEnergy(10);
+  addXP(10);
 
   goalValue.textContent =
     app.studyMinutes;
