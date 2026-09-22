@@ -2829,6 +2829,8 @@ function loadData() {
     createBoardButtons();
     createStreamButtons();
 
+    app.dailyGoal = 30;
+
     return;
 
   }
@@ -2842,6 +2844,62 @@ function loadData() {
       app,
       data
     );
+
+    /*
+      Defaults for users coming from the
+      older version of BrainBox.
+    */
+
+    app.energy =
+      Number(app.energy || 0);
+
+    app.level =
+      Number(app.level || 1);
+
+    app.streak =
+      Number(app.streak || 0);
+
+    app.bestStreak =
+      Number(app.bestStreak || 0);
+
+    app.studyMinutes =
+      Number(app.studyMinutes || 0);
+
+    app.todayStudyMinutes =
+      Number(app.todayStudyMinutes || 0);
+
+    app.dailyGoal =
+      Number(app.dailyGoal || 30);
+
+    if (
+      !Array.isArray(
+        app.completedLessons
+      )
+    ) {
+
+      app.completedLessons = [];
+
+    }
+
+    if (
+      !Array.isArray(
+        app.unlockedAchievements
+      )
+    ) {
+
+      app.unlockedAchievements = [];
+
+    }
+
+    if (
+      !app.quizBestScores
+    ) {
+
+      app.quizBestScores = {};
+
+    }
+
+    prepareDailyState();
 
     if (
       app.name &&
@@ -2858,8 +2916,13 @@ function loadData() {
 
   } catch (error) {
 
-    console.log(
-      "Could not load saved BrainBox data."
+    console.error(
+      "Could not load saved BrainBox data.",
+      error
+    );
+
+    localStorage.removeItem(
+      "brainboxData"
     );
 
   }
@@ -2869,8 +2932,6 @@ function loadData() {
   createStreamButtons();
 
 }
-
-
 /* =========================================
    CONTINUE LEARNING
 ========================================= */
