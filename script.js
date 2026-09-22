@@ -929,15 +929,8 @@ card.type = "button";
       </div>
     `;
 
-    card.addEventListener("click", () => {
-
-      addEnergy(5);
-
-      showToast(
-        `${subject[1]} selected! +5 ⚡`,
-        "📚"
-      );
-
+        card.addEventListener("click", () => {
+      openSubject(subject[1]);
     });
 
     subjectsGrid.appendChild(card);
