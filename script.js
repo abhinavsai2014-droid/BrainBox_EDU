@@ -2734,6 +2734,10 @@ timerButton.addEventListener(
 
 function startTimer() {
 
+  if (app.timerRunning) {
+    return;
+  }
+
   app.timerRunning =
     true;
 
@@ -2751,6 +2755,7 @@ function startTimer() {
           completeFocusSession();
 
           return;
+
         }
 
         app.timerSeconds--;
