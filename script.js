@@ -2731,14 +2731,81 @@ function saveData() {
   localStorage.setItem(
     "brainboxData",
     JSON.stringify({
+
+      /* PROFILE */
+
       name: app.name,
       grade: app.grade,
       board: app.board,
       stream: app.stream,
+
+      /* XP / LEVEL */
+
       energy: app.energy,
-      streak: app.streak,
-      studyMinutes: app.studyMinutes,
-      level: app.level
+      level: app.level,
+
+      /* LEARNING */
+
+      currentSubject:
+        app.currentSubject || "",
+
+      currentChapter:
+        Number.isInteger(app.currentChapter)
+          ? app.currentChapter
+          : null,
+
+      currentLesson:
+        Number.isInteger(app.currentLesson)
+          ? app.currentLesson
+          : null,
+
+      completedLessons:
+        Array.isArray(app.completedLessons)
+          ? app.completedLessons
+          : [],
+
+      /* STUDY */
+
+      studyMinutes:
+        Number(app.studyMinutes || 0),
+
+      todayStudyMinutes:
+        Number(app.todayStudyMinutes || 0),
+
+      dailyGoal:
+        Number(app.dailyGoal || 30),
+
+      dailyGoalCompleted:
+        Boolean(app.dailyGoalCompleted),
+
+      /* STREAK */
+
+      streak:
+        Number(app.streak || 0),
+
+      bestStreak:
+        Number(app.bestStreak || 0),
+
+      lastStudyDate:
+        app.lastStudyDate || "",
+
+      lastDailyReset:
+        app.lastDailyReset || "",
+
+      /* ACHIEVEMENTS */
+
+      unlockedAchievements:
+        Array.isArray(
+          app.unlockedAchievements
+        )
+          ? app.unlockedAchievements
+          : [],
+
+      /* QUIZZES */
+
+      quizBestScores:
+        app.quizBestScores || {}
+
     })
   );
 
