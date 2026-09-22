@@ -1,1 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+
+  <title>BrainBox EDU</title>
+
+  <meta
+    name="description"
+    content="BrainBox EDU — Charge Your Brain. Unlock Your Game."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- =========================
+       WELCOME SCREEN
+  ========================== -->
+
+ <section
+  id="welcomeScreen"
+  class="screen active-screen"
+  aria-hidden="false"
+>
+    <div class="floating-symbol symbol-one">⚡</div>
+    <div class="floating-symbol symbol-two">🧠</div>
+    <div class="floating-symbol symbol-three">✨</div>
+    <div class="floating-symbol symbol-four">⭐</div>
+
+    <div class="welcome-content">
+
+      <div class="brain-logo">
+        🧠
+      </div>
+
+      <div class="brand-mini">
+        BRAINBOX <span>EDU</span>
+      </div>
+
+      <h1>
+        Welcome to<br />
+        <span>BrainBox EDU!</span> ⚡
+      </h1>
+
+      <p class="tagline">
+        Charge Your Brain.<br />
+        Unlock Your Game.
+      </p>
+
+      <p class="welcome-description">
+        Learn smarter. Build your streak. Earn energy.
+        Become the strongest version of your brain.
+      </p>
+
+     <button type="button" id="startButton" class="primary-button">
+        Let's Start <span>→</span>
+      </button>
+
+      <p class="publisher">
+        Published by <strong>Abhinav V.</strong>
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- =========================
+       ONBOARDING
+  ========================== -->
+
+ <section
+  id="onboardingScreen"
+  class="screen"
+  aria-hidden="true"
+>
+
+    <div class="onboarding-container">
+
+      <div class="onboarding-top">
+        <div class="small-brand">🧠 BrainBox EDU</div>
+
+        <div class="step-indicator">
+          <span id="stepNumber">1</span> / 4
+        </div>
+      </div>
+
+      <div class="progress-track">
+  <div
+    id="onboardingProgress"
+    class="progress-fill"
+    role="progressbar"
+    aria-label="Onboarding progress"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="25"
+  ></div>
+</div>
+
+
+      <!-- NAME -->
+
+      <div id="nameStep" class="onboarding-step active-step">
+
+        <div class="step-icon">👋</div>
+
+        <h2>First things first!</h2>
+
+        <p>
+          What should BrainBox EDU call you?
+        </p>
+
+        <label for="nameInput" class="sr-only">
+  Your name
+</label>
+
+<input
+  id="nameInput"
+  class="text-input"
+  type="text"
+  placeholder="Enter your name..."
+  maxlength="25"
+  autocomplete="name"
+  aria-label="Your name"
+  aria-describedby="nameError"
+/>
+
+<p
+  id="nameError"
+  class="input-error"
+  role="alert"
+  aria-live="assertive"
+></p>
+
+<button
+  type="button"
+  id="nameNextButton"
+  class="primary-button"
+>
+  Continue →
+</button>
+
+      </div>
+
+
+      <!-- GRADE -->
+
+      <div id="gradeStep" class="onboarding-step">
+
+        <div class="step-icon">🎓</div>
+
+        <h2>What grade are you in?</h2>
+
+        <p>
+          Choose your current grade.
+        </p>
+
+        <div id="gradeGrid" class="choice-grid">
+        </div>
+
+        <button type="button" id="gradeNextButton" class="primary-button">
+          Continue →
+        </button>
+
+      </div>
+
+
+      <!-- BOARD -->
+
+      <div id="boardStep" class="onboarding-step">
+
+        <div class="step-icon">📚</div>
+
+        <h2>Which board do you follow?</h2>
+
+        <p>
+          Choose your educational system.
+        </p>
+
+        <div id="boardGrid" class="choice-grid board-grid">
+        </div>
+
+        <button type="button" id="boardNextButton" class="primary-button">
+          Continue →
+        </button>
+
+      </div>
+
+
+      <!-- STREAM -->
+
+      <div id="streamStep" class="onboarding-step">
+
+        <div class="step-icon">🚀</div>
+
+        <h2>Almost ready!</h2>
+
+        <p>
+          Choose your stream.
+        </p>
+
+        <div id="streamGrid" class="choice-grid">
+        </div>
+
+        <button type="button" id="finishOnboardingButton" class="primary-button">
+          Enter BrainBox EDU 🚀
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================
+       DASHBOARD
+  ========================== -->
+
+  <section
+  id="dashboardScreen"
+  class="screen dashboard-screen"
+  aria-hidden="true"
+>
+    <header class="topbar">
+
+      <div class="brand">
+        <div class="brand-icon">🧠</div>
+
+        <div>
+          <div class="brand-name">
+            BrainBox <span>EDU</span>
+          </div>
+
+          <div class="brand-subtitle">
+            Charge Your Brain. Unlock Your Game.
+          </div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+
+        <button type="button" id="themeButton" class="icon-button" title="Toggle theme">
+          🌙
+        </button>
+
+        <div class="profile-circle" id="profileInitial">
+          A
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="dashboard-container">
+
+      <!-- HERO -->
+
+      <section class="dashboard-hero">
+
+        <div class="hero-text">
+
+          <div class="greeting">
+            <span id="greetingText">Hey!</span> 👋
+          </div>
+
+          <h1>
+            Ready to power<br />
+            up your brain?
+          </h1>
+
+          <p>
+            Your next level is waiting.
+          </p>
+
+          <button type="button" id="continueButton" class="hero-button">
+            Continue Learning
+            <span>→</span>
+          </button>
+
+        </div>
+
+        <div class="hero-brain">
+          🧠
+          <div class="energy-orbit">⚡</div>
+        </div>
+
+      </section>
+
+
+      <!-- ENERGY -->
+
+      <section class="energy-card">
+
+        <div class="energy-header">
+
+          <div>
+            <div class="card-label">
+              CURRENT ENERGY
+            </div>
+
+            <div class="energy-number">
+              <span id="energyValue">100</span>
+              <small>/ 500</small>
+              <span class="energy-bolt">⚡</span>
+            </div>
+          </div>
+
+          <div class="energy-level">
+            LEVEL <strong id="levelValue">1</strong>
+          </div>
+
+        </div>
+
+        <div class="energy-track">
+  <div
+    id="energyBar"
+    class="energy-fill"
+    role="progressbar"
+    aria-label="Current energy"
+    aria-valuemin="0"
+    aria-valuemax="500"
+    aria-valuenow="100"
+  ></div>
+</div>
+        <div class="energy-footer">
+          <span>Keep learning to charge up!</span>
+          <span id="energyPercent">20%</span>
+        </div>
+
+      </section>
+
+
+      <!-- STATS -->
+
+      <section class="stats-grid">
+
+        <div class="stat-card streak-card">
+          <div class="stat-icon">🔥</div>
+
+          <div>
+            <div class="stat-value">
+              <span id="streakValue">1</span> day
+            </div>
+
+            <div class="stat-label">
+              Learning streak
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+
+          <div>
+            <div class="stat-value">
+              <span id="goalValue">0</span> / 30 min
+            </div>
+
+            <div class="stat-label">
+              Today's goal
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+
+          <div>
+            <div class="stat-value">
+              <span id="achievementCount">1</span>
+            </div>
+
+            <div class="stat-label">
+              Achievements
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- OLYMPIAD -->
+
+      <section class="olympiad-card">
+
+        <div class="olympiad-icon">
+          🥇
+        </div>
+
+        <div class="olympiad-content">
+
+          <div class="olympiad-tag">
+            SPECIAL CHALLENGE
+          </div>
+
+          <h2>
+            Want to prepare for Olympiads?
+          </h2>
+
+          <p>
+            Test your reasoning, problem-solving and
+            subject knowledge with a short 5-point challenge.
+          </p>
+
+          <button id="olympiadButton" class="secondary-button">
+            Explore Olympiad Prep →
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- SUBJECTS -->
+
+      <section class="section-block">
+
+        <div class="section-heading">
+
+          <div>
+            <div class="section-kicker">
+              YOUR LEARNING
+            </div>
+
+            <h2>
+              Subjects
+            </h2>
+          </div>
+
+          <span id="studentGradeBadge" class="grade-badge">
+            Grade
+          </span>
+
+        </div>
+
+        <div id="subjectsGrid" class="subjects-grid">
+        </div>
+
+      </section>
+
+
+      <!-- QUESTS -->
+
+      <section class="section-block">
+
+        <div class="section-heading">
+
+          <div>
+            <div class="section-kicker">
+              GAMIFY YOUR LEARNING
+            </div>
+
+            <h2>
+              Daily Quests
+            </h2>
+          </div>
+
+        </div>
+
+        <div class="quest-grid">
+
+          <div class="quest-card">
+            <div class="quest-icon purple">⚡</div>
+            <div class="quest-info">
+              <strong>Power Up</strong>
+              <span>Answer 5 questions correctly</span>
+            </div>
+            <div class="quest-reward">+25 ⚡</div>
+          </div>
+
+          <div class="quest-card">
+            <div class="quest-icon blue">📖</div>
+            <div class="quest-info">
+              <strong>Study Sprint</strong>
+              <span>Complete 15 minutes of focus</span>
+            </div>
+            <div class="quest-reward">+10 ⚡</div>
+          </div>
+
+          <div class="quest-card">
+            <div class="quest-icon orange">🔥</div>
+            <div class="quest-info">
+              <strong>Keep the Streak</strong>
+              <span>Complete today's learning goal</span>
+            </div>
+            <div class="quest-reward">+20 ⚡</div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ACHIEVEMENTS -->
+
+      <section class="section-block">
+
+        <div class="section-heading">
+
+          <div>
+            <div class="section-kicker">
+              YOUR TROPHIES
+            </div>
+
+            <h2>
+              Achievement Shelf
+            </h2>
+          </div>
+
+        </div>
+
+        <div class="achievement-grid">
+
+          <div class="achievement-card unlocked">
+            <div class="achievement-icon">🌱</div>
+            <strong>Brain Starter</strong>
+            <span>First step completed</span>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-icon locked">⚡</div>
+            <strong>Energy Master</strong>
+            <span>Reach 500 energy</span>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-icon locked">🔥</div>
+            <strong>7-Day Hero</strong>
+            <span>Study for 7 days</span>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-icon locked">🧮</div>
+            <strong>Math Wizard</strong>
+            <span>Master 10 math concepts</span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FOCUS TIMER -->
+
+      <section class="focus-card">
+
+        <div>
+
+          <div class="section-kicker">
+            FOCUS MODE
+          </div>
+
+          <h2>
+            Power up your focus ⏱️
+          </h2>
+
+          <p>
+            Study without distractions and earn energy.
+          </p>
+
+        </div>
+
+        <div class="timer-box">
+
+          <div id="timerDisplay">
+            15:00
+          </div>
+
+          <button type="button" id="timerButton">
+            Start
+          </button>
+
+        </div>
+
+      </section>
+
+
+    </main>
+
+
+    <!-- BOTTOM NAV -->
+
+    <nav class="bottom-nav">
+
+      <button type="button" class="nav-item active">
+        <span>🏠</span>
+        <small>Home</small>
+      </button>
+
+      <button type="button" class="nav-item" id="learnNav">
+        <span>📚</span>
+        <small>Learn</small>
+      </button>
+
+      <button type="button" class="nav-item" id="gamesNav">
+        <span>🎮</span>
+        <small>Games</small>
+      </button>
+
+      <button type="button" class="nav-item" id="profileNav">
+        <span>👤</span>
+        <small>Profile</small>
+      </button>
+
+    </nav>
+
+  </section>
+
+
+  <!-- =========================
+       OLYMPIAD MODAL
+  ========================== -->
+
+  <div
+  id="olympiadModal"
+  class="modal hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="olympiadTitle"
+  aria-hidden="true"
+>
+
+  <div class="modal-card">
+
+    <button
+      type="button"
+      class="close-button"
+      id="closeOlympiad"
+      aria-label="Close Olympiad challenge"
+    >
+      ×
+    </button>
+
+      <div class="modal-icon">
+        🥇
+      </div>
+
+      <div class="section-kicker">
+        BRAINBOX EDU OLYMPIAD LAB
+      </div>
+
+      <h2 id="olympiadTitle">
+  Ready for a tougher challenge?
+</h2>
+      <p>
+        Olympiad-style questions encourage logical thinking,
+        problem solving and deeper understanding.
+      </p>
+
+      <div class="quiz-score">
+        Score:
+        <strong>
+          <span id="quizScore">0</span> / 5
+        </strong>
+      </div>
+
+      <div id="quizArea">
+      </div>
+
+      <button
+  type="button"
+  id="nextQuestionButton"
+  class="primary-button"
+>
+  Start Challenge →
+</button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       TOAST
+  ========================== -->
+
+  <div
+  id="toast"
+  class="toast"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+>
+    <span id="toastIcon">⚡</span>
+    <span id="toastMessage">BrainBox EDU is ready!</span>
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
 
