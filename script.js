@@ -1011,12 +1011,30 @@ function prepareDashboard() {
   streakValue.textContent =
     app.streak;
 
+     goalValue.textContent =
+    Number(
+      app.todayStudyMinutes || 0
+    );
+
+  achievementCount.textContent =
+    Array.isArray(
+      app.unlockedAchievements
+    )
+      ? app.unlockedAchievements.length
+      : 0;
+
   studentGradeBadge.textContent =
     `Grade ${app.grade}`;
 
   updateEnergy();
 
   createSubjects();
+     
+  prepareDailyState();
+
+  renderAchievements();
+
+  updateLearningProgress();
 
 }
 
