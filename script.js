@@ -2490,7 +2490,7 @@ nextQuestionButton.addEventListener(
 
     if (
       app.quizIndex ===
-      olympiadQuestions.length - 1
+      getQuizQuestions().length - 1
     ) {
 
       finishQuiz();
@@ -2509,7 +2509,7 @@ nextQuestionButton.addEventListener(
 function showQuestion() {
 
   const question =
-    olympiadQuestions[
+    getQuizQuestions()[
       app.quizIndex
     ];
 
@@ -2566,7 +2566,7 @@ function showQuestion() {
 
   nextQuestionButton.textContent =
     app.quizIndex ===
-    olympiadQuestions.length - 1
+    getQuizQuestions().length - 1
       ? "Finish Challenge 🏆"
       : "Next Question →";
 
